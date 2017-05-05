@@ -1,0 +1,11 @@
+import gr.DayValue
+
+model {
+    List<DayValue> dayValues
+}
+
+json {
+    data dayValues.collect({
+        [it.date.time, it.value, Math.round(Math.abs(Math.random() * 30) * 100) / 100]
+    })
+}
