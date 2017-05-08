@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './rootReducer';
+import rootReducer from './reducers';
 import { callAPIMiddleware } from './callAPIMiddleware';
 
 export default function configureStore() {

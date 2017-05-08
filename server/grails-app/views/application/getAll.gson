@@ -1,4 +1,4 @@
-import gr.DayValue
+import graduation.DayValue
 
 model {
     List<DayValue> dayValues

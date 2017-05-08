@@ -1,4 +1,4 @@
-package gr
+package graduation
 
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration

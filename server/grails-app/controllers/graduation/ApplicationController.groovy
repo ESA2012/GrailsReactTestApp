@@ -1,4 +1,4 @@
-package gr
+package graduation
 
 import grails.core.GrailsApplication
 import grails.plugins.*

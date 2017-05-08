@@ -1,4 +1,4 @@
-package gr
+package graduation
 
 import grails.transaction.Transactional
 import org.hibernate.service.spi.ServiceException
@@ -30,12 +30,12 @@ class ChartService {
         request.inputStream.splitEachLine(',') { fields ->
             Long date = fields[0] as Long
             Double value = fields[1] as Double
-            DayValue newDayValue = new DayValue(date: new Date(date), value: value)
+            DayValue newDayValue = new DayValue(date: new Date(date), value: value, temp: null)
             newDayValue.save(flush: true, failOnError: true)
         }
     }
 
-    private checkFileType(HttpServletRequest request) throws ServiceException {
+    private static checkFileType(HttpServletRequest request) throws ServiceException {
         if (request.getHeader('content-type') != 'text/csv') {
             throw new ServiceException('Incorrect file format')
         }

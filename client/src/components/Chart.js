@@ -35,22 +35,14 @@ const buildConfig = (data) => {
     },
     series: [
       {
-        name: 'Data 1 Columns',
-        type: 'column',
-        data: data1,
-        tooltip: {
-          valueDecimals: 2
-        }
-      },
-      {
         name: 'Data 1 Spline',
         type: 'spline',
         data: data1,
-        lineWidth: 1,
+        lineWidth: 1.5,
         marker: {
-          radius: 5
+          radius: 2
         },
-        color: '#f7a35c',
+        color: '#ff5050',
         tooltip: {
           valueDecimals: 2
         }
@@ -59,7 +51,7 @@ const buildConfig = (data) => {
         name: 'Data 2',
         // type: 'spline',
         data: data2,
-        color: '#ff5050',
+        color: '#0000ff',
         lineWidth: 4,
         marker: {
           radius: 7
@@ -82,5 +74,4 @@ export default class Chart extends React.Component {
       <ReactHighcharts config={buildConfig(data)} ref="chart"/>
     )
   }
-
 }

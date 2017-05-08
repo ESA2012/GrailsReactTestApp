@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import chart from './reducers/Chart';
+import charts from './charts';
+import message from './message';
 
 const rootReducer = combineReducers({
-  chart
+  charts,
+  message
 });
 
 export default rootReducer;
