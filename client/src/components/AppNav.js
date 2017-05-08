@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
+import { uploadFile } from '../redux/reducers/Chart';
 import grailsLogo from '../images/grails-cupsonly-logo-white.svg';
 
 export default class AppNav extends React.Component {
@@ -14,8 +15,9 @@ export default class AppNav extends React.Component {
     this.inputElement.click()
   }
 
-  doUploadFile() {
-    alert('AUA');
+  doUploadFile(event) {
+    const file = event.target.files[0];
+    this.props.dispatchAction(uploadFile(file));
   }
 
   render() {

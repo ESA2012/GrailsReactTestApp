@@ -23,11 +23,18 @@ export function callAPIMiddleware({ dispatch, getState }) {
       type: requestType
     }));
 
+    let body;
+    if (request.payload) {
+      body = typeof request.payload !== 'string' ? JSON.stringify(request.payload) : request.payload;
+    } else if (request.file) {
+      body = request.file !== null ? request.file : null;
+    }
+
     const options = {
       method: request.method,
-      headers: request.method === 'POST' ? {'Accept': 'application/json', 'Content-Type': 'application/json'} : null,
-      body: typeof request.payload !== 'string' ? JSON.stringify(request.payload) : request.payload
-    };
+      headers: request.headers !== null ? request.headers : request.method === 'POST' ? {'Accept': 'application/json', 'Content-Type': 'application/json'} : null,
+      body
+  };
 
     return fetch(`${SERVER_URL}${request.url}`, options)
       .then(response => response.json())

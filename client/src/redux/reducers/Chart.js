@@ -9,6 +9,11 @@ const CLEAR_DATA_FAIL = 'chart/CLEAR_DATA_FAIL';
 const ADD_DATA = 'chart/ADD_DATA';
 const ADD_DATA_SUCCESS = 'chart/ADD_DATA_SUCCESS';
 const ADD_DATA_FAIL = 'chart/ADD_DATA_FAIL';
+
+const UPLOAD_FILE = 'chart/UPLOAD_FILE';
+const UPLOAD_FILE_SUCCESS = 'chart/UPLOAD_FILE_SUCCESS';
+const UPLOAD_FILE_FAIL = 'chart/UPLOAD_FILE_FAIL';
+
 const TEST = 'chart/TEST';
 
 const initialState = fromJS({
@@ -21,6 +26,7 @@ export default function reducer(state = initialState, action = {}) {
     case GET_DATA:
       return state.set('loading', true);
     case GET_DATA_SUCCESS:
+    case UPLOAD_FILE_SUCCESS:
       return state
         .set('data', fromJS(action.body.data))
         .delete('loading');
@@ -34,10 +40,11 @@ export default function reducer(state = initialState, action = {}) {
     case CLEAR_DATA_SUCCESS:
       return state.set('data', fromJS([]));
 
-    case ADD_DATA:
+    case UPLOAD_FILE:
       return state.set('uploading', true);
     case ADD_DATA_SUCCESS:
     case ADD_DATA_FAIL:
+    case UPLOAD_FILE_FAIL:
       return state.delete('uploading', true);
 
     case TEST:
@@ -92,5 +99,21 @@ export function test() {
   return {
     type: TEST,
     payload: [value1, value2]
+  }
+}
+
+export function uploadFile(data) {
+  console.log(data);
+  return {
+    types: [UPLOAD_FILE, UPLOAD_FILE_SUCCESS, UPLOAD_FILE_FAIL],
+    request: {
+      method: 'POST',
+      url: 'upload',
+      file: data,
+      headers: {
+        'Content-Type': data.type,
+        name: data.name
+      }
+    }
   }
 }

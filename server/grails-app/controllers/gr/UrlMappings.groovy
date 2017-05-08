@@ -11,6 +11,7 @@ class UrlMappings {
         get "/getAll"(controller: 'application', action: 'getAll')
         get "/clearAll"(controller: 'application', action: 'clearAll')
         post "/add"(controller: 'application', action: 'add')
+        post "/upload"(controller: 'application', action: 'upload')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

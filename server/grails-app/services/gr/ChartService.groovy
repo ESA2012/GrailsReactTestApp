@@ -1,6 +1,9 @@
 package gr
 
 import grails.transaction.Transactional
+import org.hibernate.service.spi.ServiceException
+
+import javax.servlet.http.HttpServletRequest
 
 @Transactional
 class ChartService {
@@ -19,5 +22,22 @@ class ChartService {
 
     def getData() {
         DayValue.findAll()
+    }
+
+    def addDataFromStream(HttpServletRequest request) throws Exception {
+        checkFileType(request)
+        clearAllData()
+        request.inputStream.splitEachLine(',') { fields ->
+            Long date = fields[0] as Long
+            Double value = fields[1] as Double
+            DayValue newDayValue = new DayValue(date: new Date(date), value: value)
+            newDayValue.save(flush: true, failOnError: true)
+        }
+    }
+
+    private checkFileType(HttpServletRequest request) throws ServiceException {
+        if (request.getHeader('content-type') != 'text/csv') {
+            throw new ServiceException('Incorrect file format')
+        }
     }
 }

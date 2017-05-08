@@ -9,7 +9,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AppNav clientInfo={{CLIENT_VERSION, REACT_VERSION}}/>
+        <AppNav
+          dispatchAction={this.props.dispatchAction}
+          clientInfo={{CLIENT_VERSION, REACT_VERSION}}
+        />
         <Workspace
           dispatchAction={this.props.dispatchAction}
           chartData={this.props.data}

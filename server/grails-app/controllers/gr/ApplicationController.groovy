@@ -1,7 +1,6 @@
 package gr
 
 import grails.core.GrailsApplication
-import grails.util.Environment
 import grails.plugins.*
 
 class ApplicationController implements PluginManagerAware {
@@ -25,6 +24,11 @@ class ApplicationController implements PluginManagerAware {
     }
 
     def getAll() {
+        [dayValues: chartService.getData()]
+    }
+
+    def upload() {
+        chartService.addDataFromStream(request)
         [dayValues: chartService.getData()]
     }
 }

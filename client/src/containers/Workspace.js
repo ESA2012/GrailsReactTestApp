@@ -46,6 +46,3 @@ export default class Workspace extends React.Component {
     )
   }
 }
-
-
-
